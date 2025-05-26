@@ -35,7 +35,7 @@ DEBUG = True
 # DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 # Set hosts to allow any app on Railway and the local testing URL
-ALLOWED_HOSTS = ['.railway.app', '.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['.railway.app', '.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Set CSRF trusted origins to allow any app on Railway and the local testing URL
 CSRF_TRUSTED_ORIGINS = ['https://*.railway.app',
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Add our new application
     'catalog.apps.CatalogConfig',  # This object was created for us in /catalog/apps.py
+    'mozilla_django_oidc',  # OIDC authentication
 ]
 
 MIDDLEWARE = [
@@ -128,10 +129,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/'
-
 # Add to test email:
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -165,3 +162,18 @@ STORAGES = {
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = (
+    'locallibrary.oidc_backend.KeycloakOIDCAuthenticationBackend',
+)
+
+OIDC_RP_CLIENT_ID = '321666055963475971'
+OIDC_RP_CLIENT_SECRET = 'OgmRF3QnlpECCdIvDIg4enonCdEGGahY7mjDQw0LR6QXfkRBtTSetDjPwUu8pIQF'
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/oauth/v2/authorize'
+OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/oauth/v2/token'
+OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/oauth/v2/userinfo'
+OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/oauth/v2/keys'
+LOGIN_URL = '/oidc/authenticate/'
+LOGIN_REDIRECT_URL = "http://localhost:8000/oidc/callback/"
+LOGOUT_REDIRECT_URL = "http://localhost:8000"
+OIDC_RP_SIGN_ALGO = "RS256"
