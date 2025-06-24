@@ -167,12 +167,12 @@ AUTHENTICATION_BACKENDS = (
     'locallibrary.oidc_backend.KeycloakOIDCAuthenticationBackend',
 )
 
-OIDC_RP_CLIENT_ID = 'testing'
-OIDC_RP_CLIENT_SECRET = 'K7xaSlSG2ib7FHA5bPmUVcLarTPN6805'
-OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://localhost:8080/realms/SKYFORGE2/protocol/openid-connect/auth'
-OIDC_OP_TOKEN_ENDPOINT = 'http://localhost:8080/realms/SKYFORGE2/protocol/openid-connect/token'
-OIDC_OP_USER_ENDPOINT = 'http://localhost:8080/realms/SKYFORGE2/protocol/openid-connect/userinfo'
-OIDC_OP_JWKS_ENDPOINT = 'http://localhost:8080/realms/SKYFORGE2/protocol/openid-connect/certs'
+OIDC_RP_CLIENT_ID = 'dummy'
+OIDC_RP_CLIENT_SECRET = 'KkiDZY0SaKimqpMavoa4WvWO8GuINoxo'
+OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/auth'
+OIDC_OP_TOKEN_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/token'
+OIDC_OP_USER_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/userinfo'
+OIDC_OP_JWKS_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/certs'
 LOGIN_URL = '/oidc/authenticate/'
 LOGIN_REDIRECT_URL = "http://localhost:8000/oidc/callback/"
 LOGOUT_REDIRECT_URL = "http://localhost:8000"
