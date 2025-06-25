@@ -167,7 +167,7 @@ AUTHENTICATION_BACKENDS = (
     'locallibrary.oidc_backend.KeycloakOIDCAuthenticationBackend',
 )
 
-OIDC_RP_CLIENT_ID = 'dummy'
+OIDC_RP_CLIENT_ID = 'backstage'
 OIDC_RP_CLIENT_SECRET = 'KkiDZY0SaKimqpMavoa4WvWO8GuINoxo'
 OIDC_OP_AUTHORIZATION_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/auth'
 OIDC_OP_TOKEN_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/token'
