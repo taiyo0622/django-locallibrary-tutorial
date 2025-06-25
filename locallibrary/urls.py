@@ -14,43 +14,39 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from django.views.generic import RedirectView
 
-# Use include() to add URLS from the catalog application and authentication system
-from django.urls import include
-from catalog.views import post_login_redirect
-
+from catalog.views import oidc_callback, post_login_redirect
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
 
 urlpatterns += [
-    path('catalog/', include('catalog.urls')),
+    path("catalog/", include("catalog.urls")),
 ]
 
 
 # Use static() to add url mapping to serve static files during development (only)
-from django.conf import settings
-from django.conf.urls.static import static
-
-
-urlpatterns+= static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 # Add URL maps to redirect the base URL to our application
-from django.views.generic import RedirectView
 urlpatterns += [
-    path('', RedirectView.as_view(url='/catalog/', permanent=True)),
+    path("", RedirectView.as_view(url="/catalog/", permanent=True)),
 ]
-
 
 
 # Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('oidc/', include('mozilla_django_oidc.urls')),
-    path('post-login-redirect/', post_login_redirect, name='post_login_redirect'),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("oidc/", include("mozilla_django_oidc.urls")),
+    path("post-login-redirect/", post_login_redirect, name="post_login_redirect"),
+    path("oidc/callback", oidc_callback, name="oidc-callback-root"),
 ]

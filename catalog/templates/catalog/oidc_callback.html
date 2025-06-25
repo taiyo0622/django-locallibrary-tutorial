@@ -1,0 +1,7 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>OIDC Callback Payload</h1>
+  <pre>{{ payload|safe }}</pre>
+  <p>The payload above contains the query parameters returned from the OIDC provider.</p>
+{% endblock %}
