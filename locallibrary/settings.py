@@ -175,5 +175,8 @@ OIDC_OP_USER_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-c
 OIDC_OP_JWKS_ENDPOINT = 'http://172.19.1.10:8080/realms/idpaas/protocol/openid-connect/certs'
 LOGIN_URL = '/oidc/authenticate/'
 LOGIN_REDIRECT_URL = '/post-login-redirect/'  # Redirect to catalog app after login
+# LOGIN_REDIRECT_URL = '/oidc/callback/'
 LOGOUT_REDIRECT_URL = "http://localhost:8000"
 OIDC_RP_SIGN_ALGO = "RS256"
+OIDC_STORE_ACCESS_TOKEN = True
+
