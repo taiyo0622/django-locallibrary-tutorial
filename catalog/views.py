@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -6,6 +6,8 @@ from .models import Book, Author, BookInstance, Genre, Language
 
 def index(request):
     """View function for home page of site."""
+    access_token= request.session.get('oidc_access_token', None)
+    print(f"Access Token: {access_token}")
     # Generate counts of some of the main objects
     num_books = Book.objects.all().count()
     num_instances = BookInstance.objects.all().count()
@@ -262,3 +264,13 @@ class BookInstanceDelete(PermissionRequiredMixin, DeleteView):
     model = BookInstance
     success_url = reverse_lazy('bookinstances')
     permission_required = 'catalog.delete_bookinstance'
+
+
+def post_login_redirect(request):
+    return redirect(
+        "http://172.19.1.20:8080/realms/master/protocol/openid-connect/auth"
+        "?client_id=idpaas-oidc-test"
+        "&response_type=code"
+        "&redirect_uri=http://localhost:8000/oidc/callback/"
+        "&kc_idp_hint=idpaas-oidc"
+    )

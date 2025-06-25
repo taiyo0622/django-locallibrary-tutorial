@@ -19,6 +19,7 @@ from django.urls import path
 
 # Use include() to add URLS from the catalog application and authentication system
 from django.urls import include
+from catalog.views import post_login_redirect
 
 
 urlpatterns = [
@@ -51,4 +52,5 @@ urlpatterns += [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     path('oidc/', include('mozilla_django_oidc.urls')),
+    path('post-login-redirect/', post_login_redirect, name='post_login_redirect'),
 ]

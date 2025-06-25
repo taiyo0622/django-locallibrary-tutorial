@@ -37,7 +37,7 @@
        </form>
     </li>
    {% else %}
-     <li><a href="{% url 'oidc_authentication_init'%}?next={{request.path}}">Login</a></li>
+     <li><a href="{% url 'oidc_authentication_init'%}">Login</a></li>
    {% endif %}
   </ul>
 
