@@ -313,7 +313,7 @@ def post_login_redirect(request):
 
     return redirect(
         "http://172.19.1.20:8080/realms/master/protocol/openid-connect/auth"
-        "?client_id=idpaas-oidc-test"
+        "?client_id=idpaas-broker"
         "&response_type=code"
         "&redirect_uri=http://localhost:8000/oidc/callback"
         "&kc_idp_hint=idpaas-oidc"
